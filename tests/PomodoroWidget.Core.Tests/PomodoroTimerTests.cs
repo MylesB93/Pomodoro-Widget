@@ -1,5 +1,3 @@
-using System.Collections.Generic;
-
 namespace PomodoroWidget.Core.Tests;
 
 public class PomodoroTimerTests
