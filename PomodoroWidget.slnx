@@ -1,5 +1,6 @@
 <Solution>
   <Folder Name="/src/">
+    <Project Path="src/PomodoroWidget.App/PomodoroWidget.App.csproj" />
     <Project Path="src/PomodoroWidget.Core/PomodoroWidget.Core.csproj" />
   </Folder>
   <Folder Name="/tests/">

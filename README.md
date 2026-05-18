@@ -13,6 +13,8 @@ Core pomodoro logic for a .NET MAUI widget/app scenario.
 
 ### Prerequisites
 - [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- Visual Studio 2022 with the **.NET Multi-platform App UI development** workload
+- Android SDK + emulator configured in Visual Studio
 
 ### Steps
 1. Open a terminal in the repository root:
@@ -32,4 +34,9 @@ Core pomodoro logic for a .NET MAUI widget/app scenario.
    dotnet test PomodoroWidget.slnx
    ```
 
-> Note: this repository currently contains the core timer library and tests.
+## Run in Visual Studio 2022 emulator
+
+1. Open `/home/runner/work/Pomodoro-Widget/Pomodoro-Widget/PomodoroWidget.slnx` in Visual Studio 2022.
+2. Set **PomodoroWidget.App** as the startup project.
+3. In the device dropdown, choose an Android emulator.
+4. Press **F5** to build and launch the app in the emulator.
