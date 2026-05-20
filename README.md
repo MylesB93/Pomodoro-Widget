@@ -12,7 +12,7 @@ Core pomodoro logic for a .NET MAUI widget/app scenario.
 ## Run locally
 
 ### Prerequisites
-- [.NET 10 SDK](https://dotnet.microsoft.com/download)
+- [.NET 9 SDK](https://dotnet.microsoft.com/download/dotnet/9.0)
 - Visual Studio 2022 with the **.NET Multi-platform App UI development** workload
 - Android SDK + emulator configured in Visual Studio
 
