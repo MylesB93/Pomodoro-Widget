@@ -5,6 +5,7 @@ namespace PomodoroWidget.App;
 public partial class MainPage : ContentPage
 {
     private readonly HomeScreenWidgetController _controller = new(new PomodoroTimer());
+    private readonly IDispatcherTimer _uiTickTimer;
     private PomodoroStatus _status;
 
     public MainPage()
@@ -12,6 +13,11 @@ public partial class MainPage : ContentPage
         InitializeComponent();
         _status = _controller.StopTimer();
         UpdateDisplay();
+
+        _uiTickTimer = Dispatcher.CreateTimer();
+        _uiTickTimer.Interval = TimeSpan.FromSeconds(1);
+        _uiTickTimer.Tick += OnUiTick;
+        _uiTickTimer.Start();
     }
 
     private void OnStartClicked(object sender, EventArgs e)
@@ -32,6 +38,17 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
     }
 
+    private void OnUiTick(object? sender, EventArgs e)
+    {
+        if (!_status.IsRunning)
+        {
+            return;
+        }
+
+        _status = _controller.Tick(TimeSpan.FromSeconds(1));
+        UpdateDisplay();
+    }
+
     private void UpdateDisplay()
     {
         StateValueLabel.Text = _status.IsRunning ? "Running" : "Stopped";
@@ -40,4 +57,3 @@ public partial class MainPage : ContentPage
         SummaryValueLabel.Text = _controller.BuildDailySummaryText();
     }
 }
-
