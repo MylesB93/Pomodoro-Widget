@@ -57,7 +57,7 @@ internal static class PomodoroWidgetHost
             {
                 lock (SyncRoot)
                 {
-                    if (!Timer.IsRunning)
+                    if (_appContext is null || !Timer.IsRunning)
                     {
                         return;
                     }
