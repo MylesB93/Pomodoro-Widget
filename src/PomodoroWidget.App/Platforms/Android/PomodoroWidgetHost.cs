@@ -7,7 +7,7 @@ internal static class PomodoroWidgetHost
     private static readonly object SyncRoot = new();
     private static readonly AppWidgetStateSink WidgetStateSink = new();
     private static readonly PomodoroTimer Timer = new(widgetStateSink: WidgetStateSink);
-    private static readonly HomeScreenWidgetController Controller = new(Timer);
+    internal static readonly HomeScreenWidgetController Controller = new(Timer);
     private static readonly TimeSpan TickInterval = TimeSpan.FromSeconds(1);
 
     private static System.Threading.Timer? _ticker;

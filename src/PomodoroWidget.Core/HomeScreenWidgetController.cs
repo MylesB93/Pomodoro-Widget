@@ -9,6 +9,8 @@ public sealed class HomeScreenWidgetController
         _timer = timer;
     }
 
+    public PomodoroStatus GetStatus() => _timer.GetStatus();
+
     public PomodoroStatus StartTimer() => _timer.Start();
 
     public PomodoroStatus StopTimer() => _timer.Stop();
