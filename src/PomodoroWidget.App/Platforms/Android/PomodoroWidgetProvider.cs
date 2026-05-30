@@ -59,6 +59,7 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
         remoteViews.SetTextViewText(Resource.Id.remainingText, FormatRemaining(status.Remaining));
         remoteViews.SetTextViewText(Resource.Id.summaryText, $"{status.CompletedFocusSessionsToday} completed today");
         remoteViews.SetTextViewText(Resource.Id.stateText, status.IsRunning ? "Running" : "Stopped");
+        remoteViews.SetOnClickPendingIntent(Resource.Id.widgetRoot, BuildLaunchAppPendingIntent(context));
         remoteViews.SetOnClickPendingIntent(Resource.Id.startButton, BuildActionPendingIntent(context, ActionStart));
         remoteViews.SetOnClickPendingIntent(Resource.Id.stopButton, BuildActionPendingIntent(context, ActionStop));
         return remoteViews;
@@ -69,6 +70,20 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
         var intent = new Intent(context, typeof(PomodoroWidgetProvider)).SetAction(action);
         var requestCode = action.GetHashCode();
         return PendingIntent.GetBroadcast(context, requestCode, intent, PendingIntentFlags.Immutable | PendingIntentFlags.UpdateCurrent);
+    }
+
+    private static PendingIntent BuildLaunchAppPendingIntent(Context context)
+    {
+        var launchIntent = context.PackageManager?.GetLaunchIntentForPackage(context.PackageName)
+            ?? new Intent(context, typeof(MainActivity));
+
+        launchIntent.SetFlags(ActivityFlags.NewTask | ActivityFlags.ClearTop | ActivityFlags.SingleTop);
+
+        return PendingIntent.GetActivity(
+            context,
+            0,
+            launchIntent,
+            PendingIntentFlags.Immutable | PendingIntentFlags.UpdateCurrent);
     }
 
     private static string PhaseToDisplay(PomodoroPhase phase) => phase switch
