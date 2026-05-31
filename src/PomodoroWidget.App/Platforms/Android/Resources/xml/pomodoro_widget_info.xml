@@ -7,4 +7,4 @@
     android:updatePeriodMillis="0"
     android:initialLayout="@layout/pomodoro_widget"
     android:widgetCategory="home_screen"
-    android:previewImage="@mipmap/appicon" />
+    android:previewImage="@mipmap/tomato" />
