@@ -19,7 +19,7 @@ Core pomodoro logic for a .NET MAUI widget/app scenario.
 ### Steps
 1. Open a terminal in the repository root:
    ```bash
-   cd /home/runner/work/Pomodoro-Widget/Pomodoro-Widget
+   cd Pomodoro-Widget
    ```
 2. Restore dependencies:
    ```bash
@@ -34,9 +34,9 @@ Core pomodoro logic for a .NET MAUI widget/app scenario.
    dotnet test PomodoroWidget.slnx
    ```
 
-## Run in Visual Studio 2022 emulator
+## Run in emulator
 
-1. Open `/home/runner/work/Pomodoro-Widget/Pomodoro-Widget/PomodoroWidget.slnx` in Visual Studio 2022.
+1. Open `PomodoroWidget.slnx`.
 2. Set **PomodoroWidget.App** as the startup project.
 3. In the device dropdown, choose an Android emulator.
 4. Press **F5** to build and launch the app in the emulator.
