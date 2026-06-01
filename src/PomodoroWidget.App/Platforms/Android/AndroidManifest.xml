@@ -1,0 +1,15 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android">
+	<application android:allowBackup="true" android:icon="@mipmap/tomato" android:roundIcon="@mipmap/tomato_round" android:supportsRtl="true">
+		<receiver android:name="com.companyname.pomodorowidget.app.PomodoroWidgetProvider" android:exported="true" android:label="Pomodoro Widget">
+			<intent-filter>
+				<action android:name="android.appwidget.action.APPWIDGET_UPDATE" />
+				<action android:name="com.companyname.pomodorowidget.app.action.START" />
+				<action android:name="com.companyname.pomodorowidget.app.action.STOP" />
+			</intent-filter>
+			<meta-data android:name="android.appwidget.provider" android:resource="@xml/pomodoro_widget_info" />
+		</receiver>
+	</application>
+	<uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+	<uses-permission android:name="android.permission.INTERNET" />
+</manifest>

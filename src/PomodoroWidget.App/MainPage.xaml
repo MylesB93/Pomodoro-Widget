@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="PomodoroWidget.App.MainPage"
+             Title="Pomodoro Widget">
+
+    <ScrollView>
+        <VerticalStackLayout Spacing="16" Padding="24">
+            <Label Text="Pomodoro Timer" FontSize="28" FontAttributes="Bold" />
+
+            <Grid ColumnDefinitions="Auto,*" RowDefinitions="Auto,Auto,Auto,Auto" ColumnSpacing="12" RowSpacing="8">
+                <Label Grid.Row="0" Grid.Column="0" Text="State" />
+                <Label x:Name="StateValueLabel" Grid.Row="0" Grid.Column="1" />
+
+                <Label Grid.Row="1" Grid.Column="0" Text="Phase" />
+                <Label x:Name="PhaseValueLabel" Grid.Row="1" Grid.Column="1" />
+
+                <Label Grid.Row="2" Grid.Column="0" Text="Remaining" />
+                <Label x:Name="RemainingValueLabel" Grid.Row="2" Grid.Column="1" />
+
+                <Label Grid.Row="3" Grid.Column="0" Text="Today" />
+                <Label x:Name="SummaryValueLabel" Grid.Row="3" Grid.Column="1" />
+            </Grid>
+
+            <HorizontalStackLayout Spacing="12">
+                <Button Text="Start" Clicked="OnStartClicked" />
+                <Button Text="Stop" Clicked="OnStopClicked" />
+            </HorizontalStackLayout>
+
+            <Button Text="Advance 1 minute" Clicked="OnAdvanceMinuteClicked" />
+        </VerticalStackLayout>
+    </ScrollView>
+
+</ContentPage>
