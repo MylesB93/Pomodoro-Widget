@@ -79,6 +79,22 @@ public class PomodoroTimerTests
         Assert.Equal("0 focused periods completed today", widgetController.BuildDailySummaryText());
     }
 
+    [Fact]
+    public void ResetStopsTimerAndRestoresRemainingTimeForCurrentPhase()
+    {
+        var timer = new PomodoroTimer();
+        var widgetController = new HomeScreenWidgetController(timer);
+
+        widgetController.StartTimer();
+        widgetController.Tick(TimeSpan.FromMinutes(10));
+
+        var status = widgetController.ResetTimer();
+
+        Assert.False(status.IsRunning);
+        Assert.Equal(PomodoroPhase.Focus, status.Phase);
+        Assert.Equal(TimeSpan.FromMinutes(25), status.Remaining);
+    }
+
     private sealed class FakeDateTimeProvider : IDateTimeProvider
     {
         public FakeDateTimeProvider(DateTimeOffset now)

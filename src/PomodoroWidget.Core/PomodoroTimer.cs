@@ -40,6 +40,13 @@ public sealed class PomodoroTimer
         return PublishStatus();
     }
 
+    public PomodoroStatus Reset()
+    {
+        IsRunning = false;
+        _remaining = GetDurationForPhase(_currentPhase);
+        return PublishStatus();
+    }
+
     public PomodoroStatus Advance(TimeSpan elapsed)
     {
         if (!IsRunning || elapsed <= TimeSpan.Zero)
