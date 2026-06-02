@@ -12,7 +12,7 @@
 		<Nullable>enable</Nullable>
 
 		<!-- Display name -->
-		<ApplicationTitle>PomodoroWidget.App</ApplicationTitle>
+		<ApplicationTitle>Pomodoro Tracker</ApplicationTitle>
 
 		<!-- App Identifier -->
 		<ApplicationId>com.companyname.pomodorowidget.app</ApplicationId>
