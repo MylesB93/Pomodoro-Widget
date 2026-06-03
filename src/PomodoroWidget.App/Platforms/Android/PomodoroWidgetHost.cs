@@ -44,6 +44,17 @@ internal static class PomodoroWidgetHost
         }
     }
 
+    public static PomodoroStatus Reset(Android.Content.Context context)
+    {
+        lock (SyncRoot)
+        {
+            EnsureContext(context);
+            var status = Controller.ResetTimer();
+            StopTicker();
+            return status;
+        }
+    }
+
     private static void EnsureContext(Android.Content.Context context)
     {
         _appContext = context.ApplicationContext;
