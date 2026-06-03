@@ -12,6 +12,7 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
 {
     public const string ActionStart = "com.companyname.pomodorowidget.app.action.START";
     public const string ActionStop = "com.companyname.pomodorowidget.app.action.STOP";
+    public const string ActionReset = "com.companyname.pomodorowidget.app.action.RESET";
 
     public override void OnUpdate(Context context, AppWidgetManager appWidgetManager, int[] appWidgetIds)
     {
@@ -34,6 +35,9 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
                 break;
             case ActionStop:
                 PomodoroWidgetHost.Stop(context);
+                break;
+            case ActionReset:
+                PomodoroWidgetHost.Reset(context);
                 break;
         }
     }
@@ -62,6 +66,7 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
         remoteViews.SetOnClickPendingIntent(Resource.Id.widgetRoot, BuildLaunchAppPendingIntent(context));
         remoteViews.SetOnClickPendingIntent(Resource.Id.startButton, BuildActionPendingIntent(context, ActionStart));
         remoteViews.SetOnClickPendingIntent(Resource.Id.stopButton, BuildActionPendingIntent(context, ActionStop));
+        remoteViews.SetOnClickPendingIntent(Resource.Id.resetButton, BuildActionPendingIntent(context, ActionReset));
         return remoteViews;
     }
 

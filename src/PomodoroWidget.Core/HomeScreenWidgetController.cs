@@ -15,6 +15,8 @@ public sealed class HomeScreenWidgetController
 
     public PomodoroStatus StopTimer() => _timer.Stop();
 
+    public PomodoroStatus ResetTimer() => _timer.Reset();
+
     public PomodoroStatus Tick(TimeSpan elapsed) => _timer.Advance(elapsed);
 
     public string BuildDailySummaryText()

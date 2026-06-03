@@ -25,6 +25,7 @@
             <HorizontalStackLayout Spacing="12">
                 <Button Text="Start" Clicked="OnStartClicked" />
                 <Button Text="Stop" Clicked="OnStopClicked" />
+                <Button Text="Reset" Clicked="OnResetClicked" />
             </HorizontalStackLayout>
 
             <Button Text="Advance 1 minute" Clicked="OnAdvanceMinuteClicked" />

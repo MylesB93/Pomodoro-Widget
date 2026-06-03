@@ -36,6 +36,12 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
     }
 
+    private void OnResetClicked(object sender, EventArgs e)
+    {
+        _status = _controller.ResetTimer();
+        UpdateDisplay();
+    }
+
     private void OnAdvanceMinuteClicked(object sender, EventArgs e)
     {
         _status = _controller.Tick(TimeSpan.FromMinutes(1));
