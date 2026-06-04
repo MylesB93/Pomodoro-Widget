@@ -26,19 +26,31 @@ public partial class MainPage : ContentPage
 
     private void OnStartClicked(object sender, EventArgs e)
     {
+#if ANDROID
+        _status = PomodoroWidgetHost.Start(Android.App.Application.Context);
+#else
         _status = _controller.StartTimer();
+#endif
         UpdateDisplay();
     }
 
     private void OnStopClicked(object sender, EventArgs e)
     {
+#if ANDROID
+        _status = PomodoroWidgetHost.Stop(Android.App.Application.Context);
+#else
         _status = _controller.StopTimer();
+#endif
         UpdateDisplay();
     }
 
     private void OnResetClicked(object sender, EventArgs e)
     {
+#if ANDROID
+        _status = PomodoroWidgetHost.Reset(Android.App.Application.Context);
+#else
         _status = _controller.ResetTimer();
+#endif
         UpdateDisplay();
     }
 
