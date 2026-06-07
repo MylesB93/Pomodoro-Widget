@@ -15,7 +15,11 @@ public partial class MainPage : ContentPage
     public MainPage()
     {
         InitializeComponent();
+#if ANDROID
+        _status = PomodoroWidgetHost.GetStatus(GetAndroidContext());
+#else
         _status = _controller.GetStatus();
+#endif
         UpdateDisplay();
 
         _uiTickTimer = Dispatcher.CreateTimer();
@@ -27,7 +31,7 @@ public partial class MainPage : ContentPage
     private void OnStartClicked(object sender, EventArgs e)
     {
 #if ANDROID
-        _status = PomodoroWidgetHost.Start(Android.App.Application.Context);
+        _status = PomodoroWidgetHost.Start(GetAndroidContext());
 #else
         _status = _controller.StartTimer();
 #endif
@@ -37,7 +41,7 @@ public partial class MainPage : ContentPage
     private void OnStopClicked(object sender, EventArgs e)
     {
 #if ANDROID
-        _status = PomodoroWidgetHost.Stop(Android.App.Application.Context);
+        _status = PomodoroWidgetHost.Stop(GetAndroidContext());
 #else
         _status = _controller.StopTimer();
 #endif
@@ -47,7 +51,7 @@ public partial class MainPage : ContentPage
     private void OnResetClicked(object sender, EventArgs e)
     {
 #if ANDROID
-        _status = PomodoroWidgetHost.Reset(Android.App.Application.Context);
+        _status = PomodoroWidgetHost.Reset(GetAndroidContext());
 #else
         _status = _controller.ResetTimer();
 #endif
@@ -65,7 +69,7 @@ public partial class MainPage : ContentPage
 #if ANDROID
         // The widget host's background ticker already advances the shared timer every second.
         // Just refresh the display from the current timer state to avoid double-advancing.
-        _status = _controller.GetStatus();
+        _status = PomodoroWidgetHost.GetStatus(GetAndroidContext());
         UpdateDisplay();
 #else
         if (!_status.IsRunning)
@@ -77,6 +81,12 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
 #endif
     }
+
+#if ANDROID
+    private static Android.Content.Context GetAndroidContext() =>
+        Android.App.Application.Context
+        ?? throw new InvalidOperationException("Android application context is unavailable.");
+#endif
 
     private void UpdateDisplay()
     {
