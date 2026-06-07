@@ -19,6 +19,10 @@ public sealed class HomeScreenWidgetController
 
     public PomodoroStatus Tick(TimeSpan elapsed) => _timer.Advance(elapsed);
 
+    public PomodoroSettings GetSettings() => _timer.GetSettings();
+
+    public PomodoroStatus UpdateSettings(PomodoroSettings settings) => _timer.UpdateSettings(settings);
+
     public string BuildDailySummaryText()
     {
         var count = _timer.GetStatus().CompletedFocusSessionsToday;

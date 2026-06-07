@@ -4,7 +4,7 @@ namespace PomodoroWidget.Core;
 
 public sealed class PomodoroTimer
 {
-    private readonly PomodoroSettings _settings;
+    private PomodoroSettings _settings;
     private readonly IDateTimeProvider _dateTimeProvider;
     private readonly IWidgetStateSink? _widgetStateSink;
     private readonly Dictionary<DateOnly, int> _completedFocusSessionsByDate = new();
@@ -65,6 +65,15 @@ public sealed class PomodoroTimer
     }
 
     public PomodoroStatus GetStatus() => PublishStatus();
+
+    public PomodoroSettings GetSettings() => _settings;
+
+    public PomodoroStatus UpdateSettings(PomodoroSettings settings)
+    {
+        _settings = settings ?? throw new ArgumentNullException(nameof(settings));
+        _remaining = GetDurationForPhase(_currentPhase);
+        return PublishStatus();
+    }
 
     private void TransitionToNextPhase()
     {

@@ -3,6 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="PomodoroWidget.App.MainPage"
              Title="Pomodoro Widget">
+    <ContentPage.ToolbarItems>
+        <ToolbarItem Text="⚙" Clicked="OnSettingsClicked" Priority="0" Order="Primary" />
+    </ContentPage.ToolbarItems>
 
     <ScrollView>
         <VerticalStackLayout Spacing="16" Padding="24">
@@ -29,6 +32,21 @@
             </HorizontalStackLayout>
 
             <Button Text="Advance 1 minute" Clicked="OnAdvanceMinuteClicked" />
+
+            <VerticalStackLayout x:Name="SettingsPanel" IsVisible="False" Spacing="8">
+                <Label Text="Settings" FontAttributes="Bold" />
+
+                <Label Text="Focus period time" />
+                <Entry x:Name="FocusMinutesEntry" Keyboard="Numeric" />
+
+                <Label Text="Short rest time" />
+                <Entry x:Name="ShortRestMinutesEntry" Keyboard="Numeric" />
+
+                <Label Text="Long rest time" />
+                <Entry x:Name="LongRestMinutesEntry" Keyboard="Numeric" />
+
+                <Button Text="Apply settings" Clicked="OnApplySettingsClicked" />
+            </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>
 
