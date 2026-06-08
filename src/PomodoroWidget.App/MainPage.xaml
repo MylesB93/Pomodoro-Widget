@@ -45,7 +45,10 @@
                 <Label Text="Long rest time" />
                 <Entry x:Name="LongRestMinutesEntry" Keyboard="Numeric" />
 
-                <Button Text="Apply settings" Clicked="OnApplySettingsClicked" />
+                <HorizontalStackLayout Spacing="12">
+                    <Button Text="Apply settings" Clicked="OnApplySettingsClicked" />
+                    <Button Text="Reset to default" Clicked="OnResetToDefaultSettingsClicked" />
+                </HorizontalStackLayout>
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

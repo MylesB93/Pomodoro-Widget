@@ -88,6 +88,13 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
     }
 
+    private void OnResetToDefaultSettingsClicked(object sender, EventArgs e)
+    {
+        _status = _controller.UpdateSettings(PomodoroSettings.Default);
+        SetSettingsInputValues(_controller.GetSettings());
+        UpdateDisplay();
+    }
+
     private void OnUiTick(object? sender, EventArgs e)
     {
 #if ANDROID

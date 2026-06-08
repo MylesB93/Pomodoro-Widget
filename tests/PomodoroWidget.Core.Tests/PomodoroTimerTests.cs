@@ -110,6 +110,21 @@ public class PomodoroTimerTests
         Assert.Equal(TimeSpan.FromMinutes(7), shortBreakStatus.Remaining);
     }
 
+    [Fact]
+    public void UpdatingSettingsToDefaultRestoresDefaultFocusDuration()
+    {
+        var timer = new PomodoroTimer();
+        var widgetController = new HomeScreenWidgetController(timer);
+
+        widgetController.UpdateSettings(new PomodoroSettings(focusMinutes: 30, shortBreakMinutes: 7, longBreakMinutes: 20));
+        var resetStatus = widgetController.UpdateSettings(PomodoroSettings.Default);
+
+        Assert.Equal(TimeSpan.FromMinutes(25), resetStatus.Remaining);
+        Assert.Equal(25, widgetController.GetSettings().FocusMinutes);
+        Assert.Equal(5, widgetController.GetSettings().ShortBreakMinutes);
+        Assert.Equal(15, widgetController.GetSettings().LongBreakMinutes);
+    }
+
     private sealed class FakeDateTimeProvider : IDateTimeProvider
     {
         public FakeDateTimeProvider(DateTimeOffset now)
