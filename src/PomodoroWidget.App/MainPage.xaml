@@ -4,7 +4,7 @@
              x:Class="PomodoroWidget.App.MainPage"
              Title="Pomodoro Widget">
     <ContentPage.ToolbarItems>
-        <ToolbarItem Text="⚙" Clicked="OnSettingsClicked" Priority="0" Order="Primary" />
+        <ToolbarItem Text="⚙" AutomationProperties.Name="Settings" Clicked="OnSettingsClicked" Priority="0" Order="Primary" />
     </ContentPage.ToolbarItems>
 
     <ScrollView>
