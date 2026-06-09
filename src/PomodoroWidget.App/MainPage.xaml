@@ -23,8 +23,8 @@
             </Grid>
 
             <HorizontalStackLayout Spacing="12">
-                <Button Text="Start" Clicked="OnStartClicked" />
-                <Button Text="Stop" Clicked="OnStopClicked" />
+                <Button x:Name="StartButton" Text="Start" Clicked="OnStartClicked" />
+                <Button x:Name="StopButton" Text="Stop" Clicked="OnStopClicked" />
                 <Button Text="Reset" Clicked="OnResetClicked" />
             </HorizontalStackLayout>
 

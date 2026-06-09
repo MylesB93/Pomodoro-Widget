@@ -67,6 +67,9 @@ public sealed class PomodoroWidgetProvider : AppWidgetProvider
         remoteViews.SetOnClickPendingIntent(Resource.Id.startButton, BuildActionPendingIntent(context, ActionStart));
         remoteViews.SetOnClickPendingIntent(Resource.Id.stopButton, BuildActionPendingIntent(context, ActionStop));
         remoteViews.SetOnClickPendingIntent(Resource.Id.resetButton, BuildActionPendingIntent(context, ActionReset));
+        var highlightColor = Android.Graphics.Color.ParseColor("#9e9191");
+        remoteViews.SetInt(Resource.Id.startButton, "setBackgroundColor", status.IsRunning ? Android.Graphics.Color.Transparent : highlightColor);
+        remoteViews.SetInt(Resource.Id.stopButton, "setBackgroundColor", status.IsRunning ? highlightColor : Android.Graphics.Color.Transparent);
         return remoteViews;
     }
 

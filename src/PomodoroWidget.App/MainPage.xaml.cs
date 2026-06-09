@@ -88,11 +88,15 @@ public partial class MainPage : ContentPage
         ?? throw new InvalidOperationException("Android application context is unavailable.");
 #endif
 
+    private static readonly Color HighlightColor = Color.FromArgb("#9e9191");
+
     private void UpdateDisplay()
     {
         StateValueLabel.Text = _status.IsRunning ? "Running" : "Stopped";
         PhaseValueLabel.Text = _status.Phase.ToString();
         RemainingValueLabel.Text = _status.Remaining.ToString(@"mm\:ss");
         SummaryValueLabel.Text = _controller.BuildDailySummaryText();
+        StartButton.BackgroundColor = _status.IsRunning ? null : HighlightColor;
+        StopButton.BackgroundColor = _status.IsRunning ? HighlightColor : null;
     }
 }
