@@ -73,8 +73,8 @@ public partial class MainPage : ContentPage
     private async void OnApplySettingsClicked(object sender, EventArgs e)
     {
         if (!int.TryParse(FocusMinutesEntry.Text, out var focusMinutes) || focusMinutes <= 0 ||
-            !int.TryParse(ShortRestMinutesEntry.Text, out var shortBreakMinutes) || shortBreakMinutes <= 0 ||
-            !int.TryParse(LongRestMinutesEntry.Text, out var longBreakMinutes) || longBreakMinutes <= 0)
+            !int.TryParse(ShortBreakMinutesEntry.Text, out var shortBreakMinutes) || shortBreakMinutes <= 0 ||
+            !int.TryParse(LongBreakMinutesEntry.Text, out var longBreakMinutes) || longBreakMinutes <= 0)
         {
             await DisplayAlert("Invalid settings", "Please enter positive whole minutes for all settings.", "OK");
             return;
@@ -130,7 +130,7 @@ public partial class MainPage : ContentPage
     private void SetSettingsInputValues(PomodoroSettings settings)
     {
         FocusMinutesEntry.Text = settings.FocusMinutes.ToString();
-        ShortRestMinutesEntry.Text = settings.ShortBreakMinutes.ToString();
-        LongRestMinutesEntry.Text = settings.LongBreakMinutes.ToString();
+        ShortBreakMinutesEntry.Text = settings.ShortBreakMinutes.ToString();
+        LongBreakMinutesEntry.Text = settings.LongBreakMinutes.ToString();
     }
 }
