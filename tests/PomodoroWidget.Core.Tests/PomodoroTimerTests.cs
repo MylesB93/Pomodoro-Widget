@@ -125,6 +125,22 @@ public class PomodoroTimerTests
         Assert.Equal(15, widgetController.GetSettings().LongBreakMinutes);
     }
 
+    [Fact]
+    public void ResetFocusedPeriodsTodaySetsCompletedCountToZero()
+    {
+        var clock = new FakeDateTimeProvider(new DateTimeOffset(2026, 5, 17, 9, 0, 0, TimeSpan.Zero));
+        var timer = new PomodoroTimer(dateTimeProvider: clock);
+        var widgetController = new HomeScreenWidgetController(timer);
+
+        widgetController.StartTimer();
+        widgetController.Tick(TimeSpan.FromMinutes(25));
+
+        var status = widgetController.ResetFocusedPeriodsToday();
+
+        Assert.Equal(0, status.CompletedFocusSessionsToday);
+        Assert.Equal("0 focused periods completed today", widgetController.BuildDailySummaryText());
+    }
+
     private sealed class FakeDateTimeProvider : IDateTimeProvider
     {
         public FakeDateTimeProvider(DateTimeOffset now)

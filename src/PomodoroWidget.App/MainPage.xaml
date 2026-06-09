@@ -49,6 +49,8 @@
                     <Button Text="Apply settings" Clicked="OnApplySettingsClicked" />
                     <Button Text="Reset to default" Clicked="OnResetToDefaultSettingsClicked" />
                 </HorizontalStackLayout>
+
+                <Button Text="Reset Focused Periods" Clicked="OnResetFocusedPeriodsClicked" />
             </VerticalStackLayout>
         </VerticalStackLayout>
     </ScrollView>

@@ -23,6 +23,8 @@ public sealed class HomeScreenWidgetController
 
     public PomodoroStatus UpdateSettings(PomodoroSettings settings) => _timer.UpdateSettings(settings);
 
+    public PomodoroStatus ResetFocusedPeriodsToday() => _timer.ResetFocusedPeriodsToday();
+
     public string BuildDailySummaryText()
     {
         var count = _timer.GetStatus().CompletedFocusSessionsToday;

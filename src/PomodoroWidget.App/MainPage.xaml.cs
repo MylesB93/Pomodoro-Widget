@@ -95,6 +95,23 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
     }
 
+    private async void OnResetFocusedPeriodsClicked(object sender, EventArgs e)
+    {
+        var confirmed = await DisplayAlert(
+            "Reset Focused Periods",
+            "Are you sure you want to reset focused periods back to 0?",
+            "Yes",
+            "No");
+
+        if (!confirmed)
+        {
+            return;
+        }
+
+        _status = _controller.ResetFocusedPeriodsToday();
+        UpdateDisplay();
+    }
+
     private void OnUiTick(object? sender, EventArgs e)
     {
 #if ANDROID

@@ -68,6 +68,13 @@ public sealed class PomodoroTimer
 
     public PomodoroSettings GetSettings() => _settings;
 
+    public PomodoroStatus ResetFocusedPeriodsToday()
+    {
+        var today = DateOnly.FromDateTime(_dateTimeProvider.Now.LocalDateTime.Date);
+        _completedFocusSessionsByDate[today] = 0;
+        return PublishStatus();
+    }
+
     public PomodoroStatus UpdateSettings(PomodoroSettings settings)
     {
         _settings = settings ?? throw new ArgumentNullException(nameof(settings));
