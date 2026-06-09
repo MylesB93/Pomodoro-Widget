@@ -71,7 +71,10 @@ public sealed class PomodoroTimer
     public PomodoroStatus UpdateSettings(PomodoroSettings settings)
     {
         _settings = settings ?? throw new ArgumentNullException(nameof(settings));
-        _remaining = GetDurationForPhase(_currentPhase);
+        if (!IsRunning)
+        {
+            _remaining = GetDurationForPhase(_currentPhase);
+        }
         return PublishStatus();
     }
 
