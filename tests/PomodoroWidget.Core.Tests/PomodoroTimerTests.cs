@@ -96,7 +96,7 @@ public class PomodoroTimerTests
     }
 
     [Fact]
-    public void UpdatingSettingsChangesDurationsForSubsequentPhases()
+    public void UpdatingSettingsResetsCurrentPhaseRemainingAndAffectsSubsequentPhases()
     {
         var timer = new PomodoroTimer();
         var widgetController = new HomeScreenWidgetController(timer);
