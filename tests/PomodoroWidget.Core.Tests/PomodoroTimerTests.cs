@@ -126,6 +126,19 @@ public class PomodoroTimerTests
     }
 
     [Fact]
+    public void AdvanceWorksWhenTimerIsStopped()
+    {
+        var timer = new PomodoroTimer();
+        var widgetController = new HomeScreenWidgetController(timer);
+
+        var status = widgetController.Tick(TimeSpan.FromMinutes(1));
+
+        Assert.False(status.IsRunning);
+        Assert.Equal(PomodoroPhase.Focus, status.Phase);
+        Assert.Equal(TimeSpan.FromMinutes(24), status.Remaining);
+    }
+
+    [Fact]
     public void ResetFocusedPeriodsTodaySetsCompletedCountToZero()
     {
         var clock = new FakeDateTimeProvider(new DateTimeOffset(2026, 5, 17, 9, 0, 0, TimeSpan.Zero));

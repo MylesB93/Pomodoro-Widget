@@ -49,7 +49,7 @@ public sealed class PomodoroTimer
 
     public PomodoroStatus Advance(TimeSpan elapsed)
     {
-        if (!IsRunning || elapsed <= TimeSpan.Zero)
+        if (elapsed <= TimeSpan.Zero)
         {
             return PublishStatus();
         }
