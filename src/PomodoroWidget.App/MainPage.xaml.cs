@@ -21,6 +21,7 @@ public partial class MainPage : ContentPage
         _status = _controller.GetStatus();
 #endif
         UpdateDisplay();
+        SetSettingsInputValues(_controller.GetSettings());
 
         _uiTickTimer = Dispatcher.CreateTimer();
         _uiTickTimer.Interval = TimeSpan.FromSeconds(1);
@@ -64,6 +65,53 @@ public partial class MainPage : ContentPage
         UpdateDisplay();
     }
 
+    private void OnSettingsClicked(object sender, EventArgs e)
+    {
+        SettingsPanel.IsVisible = !SettingsPanel.IsVisible;
+    }
+
+    private async void OnApplySettingsClicked(object sender, EventArgs e)
+    {
+        if (!int.TryParse(FocusMinutesEntry.Text, out var focusMinutes) || focusMinutes <= 0 ||
+            !int.TryParse(ShortBreakMinutesEntry.Text, out var shortBreakMinutes) || shortBreakMinutes <= 0 ||
+            !int.TryParse(LongBreakMinutesEntry.Text, out var longBreakMinutes) || longBreakMinutes <= 0)
+        {
+            await DisplayAlert("Invalid settings", "Please enter positive whole minutes for all settings.", "OK");
+            return;
+        }
+
+        _status = _controller.UpdateSettings(new PomodoroSettings(
+            focusMinutes: focusMinutes,
+            shortBreakMinutes: shortBreakMinutes,
+            longBreakMinutes: longBreakMinutes));
+        SetSettingsInputValues(_controller.GetSettings());
+        UpdateDisplay();
+    }
+
+    private void OnResetToDefaultSettingsClicked(object sender, EventArgs e)
+    {
+        _status = _controller.UpdateSettings(PomodoroSettings.Default);
+        SetSettingsInputValues(_controller.GetSettings());
+        UpdateDisplay();
+    }
+
+    private async void OnResetFocusedPeriodsClicked(object sender, EventArgs e)
+    {
+        var confirmed = await DisplayAlert(
+            "Reset Focused Periods",
+            "Are you sure you want to reset focused periods back to 0?",
+            "Yes",
+            "No");
+
+        if (!confirmed)
+        {
+            return;
+        }
+
+        _status = _controller.ResetFocusedPeriodsToday();
+        UpdateDisplay();
+    }
+
     private void OnUiTick(object? sender, EventArgs e)
     {
 #if ANDROID
@@ -94,5 +142,12 @@ public partial class MainPage : ContentPage
         PhaseValueLabel.Text = _status.Phase.ToString();
         RemainingValueLabel.Text = _status.Remaining.ToString(@"mm\:ss");
         SummaryValueLabel.Text = _controller.BuildDailySummaryText();
+    }
+
+    private void SetSettingsInputValues(PomodoroSettings settings)
+    {
+        FocusMinutesEntry.Text = settings.FocusMinutes.ToString();
+        ShortBreakMinutesEntry.Text = settings.ShortBreakMinutes.ToString();
+        LongBreakMinutesEntry.Text = settings.LongBreakMinutes.ToString();
     }
 }
